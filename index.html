@@ -92,16 +92,81 @@
 
 
 
-<a href="nextpage.html" class="button">
-  Open Next Page
+
+
+<!-- LOCK SECTION -->
+<h2>Unlock Next Page 🔓</h2>
+
+<!-- YouTube -->
+<a class="button"
+   href="https://youtube.com/@vhdix?si=ldBQZ_5MDirMo38W"
+   target="_blank"
+   onclick="ytDone()">
+  ✅ Subscribe on YouTube
 </a>
 
+<br><br>
 
+<!-- Instagram -->
+<a class="button"
+   href="https://www.instagram.com/ydv_rohit_ff"
+   target="_blank"
+   style="background:#E1306C;"
+   onclick="instaDone()">
+  ✅ Follow on Instagram
+</a>
+
+<br><br>
+
+<!-- Locked Next Page Button -->
+<button id="nextBtn"
+  disabled
+  style="
+    padding:15px 30px;
+    font-size:18px;
+    border-radius:30px;
+    border:none;
+    background:gray;
+    color:white;
+    cursor:not-allowed;
+  ">
+  🔒 Open Next Page
+</button>
     
     <footer>
       © 2026 VHDIX. All rights reserved.
     </footer>
   </div>
+<script>
+  let youtubeDone = false;
+  let instagramDone = false;
 
+  function ytDone() {
+    youtubeDone = true;
+    alert("YouTube subscribed ✔️\nNow follow on Instagram");
+  }
+
+  function instaDone() {
+    if (!youtubeDone) {
+      alert("Please subscribe on YouTube first ❌");
+      return;
+    }
+    instagramDone = true;
+    unlockNext();
+  }
+
+  function unlockNext() {
+    if (youtubeDone && instagramDone) {
+      const btn = document.getElementById("nextBtn");
+      btn.disabled = false;
+      btn.style.background = "#1DB954";
+      btn.style.cursor = "pointer";
+      btn.innerText = "✅ Open Next Page";
+      btn.onclick = function () {
+        window.location.href = "nextpage.html";
+      };
+    }
+  }
+</script>
 </body>
 </html>
