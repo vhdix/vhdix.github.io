@@ -45,6 +45,57 @@
     <h1>🔥 </h1>
     <p>You successfully opened the next page.</p>
 
+    <div class="container">
+
+  <h2>To Open Next Link, Complete These Steps</h2>
+  <p>Please follow the steps below</p>
+
+  <!-- STEP 1 -->
+  <div class="step-box">
+    <h3>Step 1: Subscribe on YouTube</h3>
+    <p id="step1Status">Status: ❌ Not Completed</p>
+
+    <a class="button"
+       href="https://youtube.com/@vhdix?si=ldBQZ_5MDirMo38W"
+       target="_blank"
+       onclick="completeStep1()">
+       Subscribe on YouTube
+    </a>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step-box">
+    <h3>Step 2: Follow on Instagram</h3>
+    <p id="step2Status">Status: 🔒 Locked</p>
+
+    <a class="button insta"
+       href="https://www.instagram.com/ydv_rohit_ff"
+       target="_blank"
+       onclick="completeStep2()">
+       Follow on Instagram
+    </a>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step-box">
+    <h3>Step 3: Open Next Website</h3>
+    <p id="step3Status">Status: 🔒 Locked</p>
+
+    <a id="finalLink"
+       class="button locked"
+       href="#"
+       onclick="return false;">
+       Open Website
+    </a>
+  </div>
+
+  <!-- COMPLETION MESSAGE -->
+  <p id="completeMsg" style="display:none; font-size:20px; margin-top:30px;">
+    🎉 All steps completed successfully!
+  </p>
+
+    </div>
+
     
 
     <a href="index.html" class="button">⬅ Back to Home</a>
