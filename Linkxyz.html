@@ -103,6 +103,37 @@
 
   <img src="monkeyfinger.jpg" alt="Monkey Finger" class="monkey-img">
 
+  <!DOCTYPE html>
+<html>
+<head>
+  <title>Sound Play</title>
+</head>
+<body>
+
+<audio id="audio">
+  <source src="websound.mp3" type="audio/mpeg">
+</audio>
+
+<button onclick="togglePlay()">▶ Play</button>
+
+<script>
+  const audio = document.getElementById("audio");
+  const btn = document.querySelector("button");
+
+  function togglePlay() {
+    if (audio.paused) {
+      audio.play();
+      btn.innerText = "⏸ Pause";
+    } else {
+      audio.pause();
+      btn.innerText = "▶ Play";
+    }
+  }
+</script>
+
+</body>
+</html>
+
   
     <a href="index.html" class="button">
       ⬅ Back to Home
