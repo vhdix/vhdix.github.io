@@ -106,29 +106,18 @@
   <!DOCTYPE html>
 <html>
 <head>
-  <title>Sound Play</title>
+  <title>Auto Sound</title>
 </head>
 <body>
 
-<audio id="audio">
+<audio id="audio" loop>
   <source src="websound.mp3" type="audio/mpeg">
 </audio>
 
-<button onclick="togglePlay()">▶ Play</button>
-
 <script>
-  const audio = document.getElementById("audio");
-  const btn = document.querySelector("button");
-
-  function togglePlay() {
-    if (audio.paused) {
-      audio.play();
-      btn.innerText = "⏸ Pause";
-    } else {
-      audio.pause();
-      btn.innerText = "▶ Play";
-    }
-  }
+  document.body.addEventListener("click", function () {
+    document.getElementById("audio").play();
+  }, { once: true });
 </script>
 
 </body>
