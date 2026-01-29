@@ -1,127 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>VHDIX Official</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      color: white;
-      text-align: center;
-    }
-    .container {
-      padding: 60px 20px;
-    }
-    h1 {
-      font-size: 42px;
-      margin-bottom: 10px;
-    }
-    p {
-      font-size: 18px;
-      opacity: 0.9;
-    }
-    a.button {
-      display: inline-block;
-      margin-top: 25px;
-      padding: 15px 30px;
-      background: red;
-      color: white;
-      text-decoration: none;
-      font-size: 18px;
-      border-radius: 30px;
-      font-weight: bold;
-    }
-    a.button:hover {
-      background: #ff3333;
-    }
-    .profile-photo {
-      width:150px;
-      height:150px;
-      border-radius:50%;
-      border:4px solid white;
-      display:block;
-      margin:20px auto 0 auto;
-      box-shadow:0 4px 15px rgba(0,0,0,0.5);
-    }
-    footer {
-      margin-top: 60px;
-      font-size: 14px;
-      opacity: 0.7;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="container">
-    <h1>VHDIX</h1>
-    <p>Official Website of VHDIX</p>
-
-        <!-- Photo should be outside the button -->
-    <img src="profilevhdix.png" alt="VHDIX" class="profile-photo">
-    
-    <!-- YouTube Button -->
-    <a class="button" href="https://youtube.com/@vhdix?si=ldBQZ_5MDirMo38W" target="_blank">
-      Subscribe on YouTube
-    </a>
-
-
-
-    <!-- Photo should be outside the button -->
-<img src="profileinsta.webp" alt="Instagram Profile" class="profile-photo">
-    
-<!-- Instagram Button -->
-<a class="button" href="https://www.instagram.com/ydv_rohit_ff" target="_blank" 
-   style="background:#E1306C;">
-  Follow on Instagram
-</a>
-    
-
-    
-    <img src="mainffid.jpg" alt="Main FFID" style="
-  display:block;
-  margin:20px auto;
-  width:100%;      /* Mobile screen ke liye adjust */
-  max-width:1608px; /* Original width */
-  height:auto;
-">
-
-
-
-
-
-
-<!-- LOCK SECTION -->
-<h2>Unlock Next Page 🔓</h2>
-
-<!-- YouTube -->
-<a class="button"
-   href="https://youtube.com/@vhdix?si=ldBQZ_5MDirMo38W"
-   target="_blank"
-   onclick="ytDone()">
-  ✅ Subscribe on YouTube
-</a>
-
-<br><br>
-
-<!-- Instagram -->
-<a class="button"
-   href="https://www.instagram.com/ydv_rohit_ff"
-   target="_blank"
-   style="background:#E1306C;"
-   onclick="instaDone()">
-  ✅ Follow on Instagram
-</a>
-
-<br><br>
-
-<!-- Locked Next Page Button -->
-<button id="nextBtn"
-  disabled
-  style="
+<meta charset="UTF-8">
+<title>VHDIX Official</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  body {
+    margin:0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color:white;
+    text-align:center;
+  }
+  .container {padding:40px 20px;}
+  h1 {font-size:42px;}
+  .button {
+    display:inline-block;
+    margin:15px;
+    padding:15px 30px;
+    background:red;
+    color:white;
+    text-decoration:none;
+    font-size:18px;
+    border-radius:30px;
+    font-weight:bold;
+  }
+  .button:hover {background:#ff3333;}
+  .progress-container {
+    width:80%;
+    height:30px;
+    background:#444;
+    border-radius:15px;
+    margin:30px auto;
+    overflow:hidden;
+    box-shadow:0 2px 10px rgba(0,0,0,0.5);
+  }
+  .progress-bar {
+    height:100%;
+    width:0%;
+    background:#1DB954;
+    transition: width 0.8s ease;
+  }
+  #nextBtn {
     padding:15px 30px;
     font-size:18px;
     border-radius:30px;
@@ -129,21 +49,53 @@
     background:gray;
     color:white;
     cursor:not-allowed;
-  ">
-  🔒 Open Next Page
-</button>
-    
-    <footer>
-      © 2026 VHDIX. All rights reserved.
-    </footer>
+    margin-top:20px;
+  }
+  #nextBtn.unlocked {
+    background:#1DB954;
+    cursor:pointer;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>VHDIX Official</h1>
+
+  <!-- Progress Bar -->
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
   </div>
+
+  <!-- YouTube -->
+  <a class="button" href="https://youtube.com/@vhdix?si=ldBQZ_5MDirMo38W" target="_blank" onclick="ytDone()">
+    ✅ Subscribe on YouTube
+  </a>
+
+  <!-- Instagram -->
+  <a class="button" href="https://www.instagram.com/ydv_rohit_ff" target="_blank" style="background:#E1306C;" onclick="instaDone()">
+    ✅ Follow on Instagram
+  </a>
+
+  <!-- Next Page -->
+  <button id="nextBtn" disabled>
+    🔒 Open Next Page
+  </button>
+</div>
+
 <script>
   let youtubeDone = false;
   let instagramDone = false;
 
+  const progress = document.getElementById("progressBar");
+  const nextBtn = document.getElementById("nextBtn");
+
   function ytDone() {
-    youtubeDone = true;
-    alert("YouTube subscribed ✔️\nNow follow on Instagram");
+    if (!youtubeDone) {
+      youtubeDone = true;
+      progress.style.width = "50%"; // aadha
+      alert("YouTube subscribed ✔️\nNow follow on Instagram");
+    }
   }
 
   function instaDone() {
@@ -151,22 +103,22 @@
       alert("Please subscribe on YouTube first ❌");
       return;
     }
-    instagramDone = true;
-    unlockNext();
+    if (!instagramDone) {
+      instagramDone = true;
+      progress.style.width = "100%"; // full
+      alert("Instagram followed ✔️\nNext page unlocked!");
+      unlockNext();
+    }
   }
 
   function unlockNext() {
-    if (youtubeDone && instagramDone) {
-      const btn = document.getElementById("nextBtn");
-      btn.disabled = false;
-      btn.style.background = "#1DB954";
-      btn.style.cursor = "pointer";
-      btn.innerText = "✅ Open Next Page";
-      btn.onclick = function () {
-        window.location.href = "nextpage.html";
-      };
+    nextBtn.disabled = false;
+    nextBtn.classList.add("unlocked");
+    nextBtn.onclick = function() {
+      window.location.href = "nextpage.html";
     }
   }
 </script>
+
 </body>
 </html>
