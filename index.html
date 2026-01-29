@@ -86,40 +86,34 @@
   height:auto;
 ">
 
+.progress-container{
+  width:80%;
+  height:25px;
+  background:#444;
+  border-radius:20px;
+  margin:20px auto;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:#1DB954;
+  transition:0.7s;
+}
 
-  <!-- LOCK SYSTEM START -->
-<h2 style="margin-top:50px;">Unlock Next Page 🔓</h2>
-
-<div class="progress-container">
-  <div class="progress-bar" id="progressBar"></div>
-</div>
-
-<div class="icon-row">
-  <img src="profilevhdix.png" id="ytIcon">
-  <img src="profileinsta.webp" id="instaIcon">
-</div>
-
-<br>
-
-<a class="button"
-   href="https://youtube.com/@vhdix?si=ldBQZ_5MDirMo38W"
-   target="_blank"
-   onclick="ytDone()">
-   ✅ Subscribe (Step 1)
-</a>
-
-<a class="button"
-   href="https://www.instagram.com/ydv_rohit_ff"
-   target="_blank"
-   style="background:#E1306C;"
-   onclick="instaDone()">
-   ✅ Follow (Step 2)
-</a>
-
-<br><br>
-
-<button id="nextBtn" disabled>🔒 Open Next Page</button>
-<!-- LOCK SYSTEM END -->
+#nextBtn{
+  padding:15px 30px;
+  border-radius:30px;
+  border:none;
+  background:gray;
+  color:white;
+  font-size:18px;
+  cursor:not-allowed;
+}
+#nextBtn.unlocked{
+  background:#1DB954;
+  cursor:pointer;
+}
 
     <footer>
       © 2026 VHDIX. All rights reserved.
