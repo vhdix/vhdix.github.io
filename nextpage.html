@@ -13,155 +13,52 @@
       color: white;
       text-align: center;
     }
+
     .container {
       padding: 80px 20px;
     }
+
     h1 {
       font-size: 40px;
     }
+
     p {
       font-size: 18px;
       opacity: 0.9;
     }
+
     .button {
       display: inline-block;
-      margin-top: 30px;
-      padding: 15px 30px;
-      background: red;
+      margin-top: 40px;
+      padding: 16px 40px;
+      background: linear-gradient(45deg,#ff0080,#ff5db1);
       color: white;
       text-decoration: none;
-      font-size: 18px;
-      border-radius: 30px;
+      font-size: 20px;
+      border-radius: 50px;
       font-weight: bold;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+      transition: 0.3s;
     }
+
     .button:hover {
-      background: #ff3333;
+      transform: scale(1.08);
+      box-shadow: 0 12px 30px rgba(255,0,128,0.6);
     }
   </style>
 </head>
-<body>
-
-  <div class="container">
-    <h1>🔥 </h1>
-    <p>You successfully opened the next page.</p>
-
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Step Unlock System</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-  color:white;
-  text-align:center;
-}
-.container{
-  padding:50px 20px;
-}
-.button{
-  display:inline-block;
-  margin:15px;
-  padding:15px 30px;
-  background:red;
-  color:white;
-  text-decoration:none;
-  font-size:18px;
-  border-radius:30px;
-  font-weight:bold;
-}
-.button:hover{ background:#ff3333; }
-.insta{ background:#E1306C; }
-.locked{
-  background:gray;
-  cursor:not-allowed;
-}
-.step-box{
-  margin:30px auto;
-  padding:20px;
-  max-width:500px;
-  border:1px solid rgba(255,255,255,0.2);
-  border-radius:15px;
-}
-</style>
-</head>
 
 <body>
+
 <div class="container">
+  <h1>🔥 Welcome</h1>
+  <p>You successfully opened the next page</p>
 
-<h2>To Open Next Link, Complete These Steps</h2>
-<p>Follow all steps carefully</p>
-
-<!-- STEP 1 -->
-<div class="step-box">
-  <h3>Step 1: Subscribe on YouTube</h3>
-  <p id="s1">Status: ❌ Not Completed</p>
-  <a class="button"
-     href="https://youtube.com/@vhdix?si=ldBQZ_5MDirMo38W"
-     target="_blank"
-     onclick="step1Done()">
-     Subscribe on YouTube
+  <!-- FINAL LINK BUTTON -->
+  <a href="Linkxyz.html" class="button">
+    🔗 Get Link
   </a>
 </div>
-
-<!-- STEP 2 -->
-<div class="step-box">
-  <h3>Step 2: Follow on Instagram</h3>
-  <p id="s2">Status: 🔒 Locked</p>
-  <a class="button insta"
-     href="https://www.instagram.com/ydv_rohit_ff"
-     target="_blank"
-     onclick="step2Done()">
-     Follow on Instagram
-  </a>
-</div>
-
-<!-- STEP 3 -->
-<div class="step-box">
-  <h3>Step 3: Open Next Website</h3>
-  <p id="s3">Status: 🔒 Locked</p>
-  <a id="finalBtn" class="button locked" href="#" onclick="return false;">
-     Get Link 🔗 
-  </a>
-</div>
-
-<p id="doneMsg" style="display:none;font-size:20px;">
-🎉 All steps completed successfully!
-</p>
-
-</div>
-
-<script>
-let s1done=false, s2done=false;
-
-function step1Done(){
-  s1done=true;
-  document.getElementById("s1").innerText="Status: ✅ Completed";
-  document.getElementById("s2").innerText="Status: ❌ Not Completed";
-}
-
-function step2Done(){
-  if(!s1done){
-    alert("Complete Step 1 first");
-    return;
-  }
-  s2done=true;
-  document.getElementById("s2").innerText="Status: ✅ Completed";
-
-  document.getElementById("s3").innerText="Status: ✅ Unlocked";
-  let btn=document.getElementById("finalBtn");
-  btn.classList.remove("locked");
-  btn.href = "Linkxyz.html";  // 🔴 yahan apna link daalo
-  btn.onclick=null;
-
-  document.getElementById("doneMsg").style.display="block";
-}
-</script>
 
 </body>
 </html>
-
