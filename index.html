@@ -89,7 +89,59 @@
 <a href="nextpage.html" class="button">
   Open Next Page
 </a>
+    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Free Diamond</title>
 
+<style>
+  body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    font-family:Arial, sans-serif;
+  }
+
+  .diamond-btn{
+    padding:16px 40px;
+    font-size:20px;
+    font-weight:bold;
+    color:#fff;
+    background:linear-gradient(45deg,#ff0080,#ff5db1);
+    border:none;
+    border-radius:50px;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(0,0,0,0.4);
+    transition:0.3s;
+  }
+
+  .diamond-btn:hover{
+    transform:scale(1.08);
+    box-shadow:0 12px 30px rgba(255,0,128,0.6);
+  }
+</style>
+</head>
+
+<body>
+
+<button class="diamond-btn" onclick="goNext()">
+  💎 Get Free Diamond
+</button>
+
+<script>
+  function goNext(){
+    window.location.href = "nextpage.html"; 
+    // yaha apna next page ka naam daal do
+  }
+</script>
+
+</body>
+</html>
     <footer>
       © 2026 VHDIX. All rights reserved.
     </footer>
