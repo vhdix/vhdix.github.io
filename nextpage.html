@@ -84,3 +84,68 @@
     position:absolute;
     top:20px;
     right:20px;
+    font-size:30px;
+    cursor:pointer;
+    background:rgba(0,0,0,0.6);
+    padding:8px 14px;
+    border-radius:50%;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>🔥 Welcome</h1>
+  <p>You successfully opened the next page</p>
+
+  <h1>📸 VHDIX Gallery</h1>
+  <p>Tap photo → Sound + Zoom</p>
+
+  <!-- GALLERY -->
+  <div class="insta-grid">
+    <img src="img1.jpg" data-sound="sound1.mp3" onclick="openPhoto(this)">
+    <img src="img2.jpg" data-sound="sound2.mp3" onclick="openPhoto(this)">
+    <img src="img3.jpg" data-sound="sound3.mp3" onclick="openPhoto(this)">
+    <img src="img4.jpg" data-sound="sound4.mp3" onclick="openPhoto(this)">
+    <img src="img5.jpg" data-sound="sound5.mp3" onclick="openPhoto(this)">
+    <img src="img6.jpg" data-sound="sound6.mp3" onclick="openPhoto(this)">
+    <img src="img7.jpg" data-sound="sound7.mp3" onclick="openPhoto(this)">
+    <img src="img8.jpg" data-sound="sound8.mp3" onclick="openPhoto(this)">
+    <img src="img9.png" data-sound="sound9.mp3" onclick="openPhoto(this)">
+    <img src="img10.jpg" data-sound="sound10.mp3" onclick="openPhoto(this)">
+  </div>
+
+  <a href="Linkxyz.html" class="button">🔗 Get Link</a>
+</div>
+
+<!-- Zoom Box -->
+<div class="zoom-overlay" id="zoomBox">
+  <span class="close-btn" onclick="closeZoom()">✕</span>
+  <img id="zoomImg">
+</div>
+
+<!-- Audio -->
+<audio id="audioPlayer"></audio>
+
+<script>
+  function openPhoto(img){
+    // show zoom
+    document.getElementById("zoomImg").src = img.src;
+    document.getElementById("zoomBox").style.display = "flex";
+
+    // play sound
+    const audio = document.getElementById("audioPlayer");
+    audio.src = img.getAttribute("data-sound");
+    audio.currentTime = 0;
+    audio.play();
+  }
+
+  function closeZoom(){
+    document.getElementById("zoomBox").style.display = "none";
+    document.getElementById("audioPlayer").pause();
+  }
+</script>
+
+</body>
+</html>
