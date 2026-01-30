@@ -13,18 +13,22 @@
       color: white;
       text-align: center;
     }
+
     .container {
       padding: 60px 20px;
     }
+
     h1 {
       font-size: 42px;
       margin-bottom: 10px;
     }
+
     p {
       font-size: 18px;
       opacity: 0.9;
     }
-    a.button {
+
+    .button {
       display: inline-block;
       margin-top: 25px;
       padding: 15px 30px;
@@ -35,18 +39,40 @@
       border-radius: 30px;
       font-weight: bold;
     }
-    a.button:hover {
+
+    .button:hover {
       background: #ff3333;
     }
+
     .profile-photo {
       width:150px;
       height:150px;
       border-radius:50%;
       border:4px solid white;
       display:block;
-      margin:20px auto 0 auto;
+      margin:20px auto;
       box-shadow:0 4px 15px rgba(0,0,0,0.5);
     }
+
+    .diamond-btn{
+      margin-top:40px;
+      padding:16px 40px;
+      font-size:20px;
+      font-weight:bold;
+      color:#fff;
+      background:linear-gradient(45deg,#ff0080,#ff5db1);
+      border:none;
+      border-radius:50px;
+      cursor:pointer;
+      box-shadow:0 8px 20px rgba(0,0,0,0.4);
+      transition:0.3s;
+    }
+
+    .diamond-btn:hover{
+      transform:scale(1.08);
+      box-shadow:0 12px 30px rgba(255,0,128,0.6);
+    }
+
     footer {
       margin-top: 60px;
       font-size: 14px;
@@ -54,98 +80,51 @@
     }
   </style>
 </head>
-<body>
-
-  <div class="container">
-    <h1>VHDIX</h1>
-    <p>Official Website of VHDIX</p>
-
-    <!-- YouTube Button -->
-    <a class="button" href="https://youtube.com/@vhdix?si=ldBQZ_5MDirMo38W" target="_blank">
-      Subscribe on YouTube
-    </a>
-
-    <!-- Photo should be outside the button -->
-    <img src="profilevhdix.png" alt="VHDIX" class="profile-photo">
-
-<!-- Instagram Button -->
-<a class="button" href="https://www.instagram.com/ydv_rohit_ff" target="_blank" 
-   style="background:#E1306C;">
-  Follow on Instagram
-</a>
-    
-<!-- Photo should be outside the button -->
-<img src="profileinsta.webp" alt="Instagram Profile" class="profile-photo">
-
-    
-    <img src="mainffid.jpg" alt="Main FFID" style="
-  display:block;
-  margin:20px auto;
-  width:100%;      /* Mobile screen ke liye adjust */
-  max-width:1608px; /* Original width */
-  height:auto;
-">
-
-<a href="nextpage.html" class="button">
-  Open Next Page
-</a>
-    
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Free Diamond</title>
-
-<style>
-  body{
-    margin:0;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-    font-family:Arial, sans-serif;
-  }
-
-  .diamond-btn{
-    padding:16px 40px;
-    font-size:20px;
-    font-weight:bold;
-    color:#fff;
-    background:linear-gradient(45deg,#ff0080,#ff5db1);
-    border:none;
-    border-radius:50px;
-    cursor:pointer;
-    box-shadow:0 8px 20px rgba(0,0,0,0.4);
-    transition:0.3s;
-  }
-
-  .diamond-btn:hover{
-    transform:scale(1.08);
-    box-shadow:0 12px 30px rgba(255,0,128,0.6);
-  }
-</style>
-</head>
 
 <body>
 
-<button class="diamond-btn" onclick="goNext()">
-  💎 Get Free Diamond
-</button>
+<div class="container">
+
+  <h1>VHDIX</h1>
+  <p>Official Website of VHDIX</p>
+
+  <!-- YouTube -->
+  <a class="button" href="https://youtube.com/@vhdix?si=ldBQZ_5MDirMo38W" target="_blank">
+    Subscribe on YouTube
+  </a>
+  <img src="profilevhdix.png" class="profile-photo">
+
+  <!-- Instagram -->
+  <a class="button" href="https://www.instagram.com/ydv_rohit_ff" target="_blank"
+     style="background:#E1306C;">
+    Follow on Instagram
+  </a>
+  <img src="profileinsta.webp" class="profile-photo">
+
+  <!-- Main Image -->
+  <img src="mainffid.jpg" style="width:100%; max-width:1608px; height:auto; margin-top:20px;">
+
+  <!-- Next Page -->
+  <a href="nextpage.html" class="button">
+    Open Next Page
+  </a>
+
+  <!-- Free Diamond Button -->
+  <button class="diamond-btn" onclick="goNext()">
+    💎 Get Free Diamond
+  </button>
+
+  <footer>
+    © 2026 VHDIX. All rights reserved.
+  </footer>
+
+</div>
 
 <script>
   function goNext(){
-    window.location.href = "freediamond.html"; 
-    // yaha apna next page ka naam daal do
+    window.location.href = "freediamond.html";
   }
 </script>
-
-
-
-    <footer>
-      © 2026 VHDIX. All rights reserved.
-    </footer>
-  </div>
 
 </body>
 </html>
