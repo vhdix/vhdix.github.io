@@ -1,67 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Next Page - VHDIX</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #141E30, #243B55);
-      color: white;
-      text-align: center;
-    }
-
-    .container {
-      padding: 80px 20px;
-    }
-
-    h1 {
-      font-size: 40px;
-    }
-
-    p {
-      font-size: 18px;
-      opacity: 0.9;
-    }
-
-    .button {
-      display: inline-block;
-      margin-top: 40px;
-      padding: 16px 40px;
-      background: linear-gradient(45deg,#ff0080,#ff5db1);
-      color: white;
-      text-decoration: none;
-      font-size: 20px;
-      border-radius: 50px;
-      font-weight: bold;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-      transition: 0.3s;
-    }
-
-    .button:hover {
-      transform: scale(1.08);
-      box-shadow: 0 12px 30px rgba(255,0,128,0.6);
-    }
-  </style>
-</head>
-
-<body>
-
-<div class="container">
-  <h1>🔥 Welcome</h1>
-  <p>You successfully opened the next page</p>
-
-
-  </a>
-</div>
-  <!DOCTYPE html>
-<html lang="en">
-<head>
 <meta charset="UTF-8">
-<title>VHDIX Gallery</title>
+<title>Next Page - VHDIX</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -73,11 +14,21 @@
     text-align:center;
   }
 
-  h1{
-    margin-top:40px;
+  .container{
+    padding:50px 20px;
   }
 
-  /* Instagram Style Grid */
+  h1{
+    margin-top:30px;
+    font-size:40px;
+  }
+
+  p{
+    font-size:18px;
+    opacity:0.9;
+  }
+
+  /* Instagram Grid */
   .insta-grid{
     margin:40px auto;
     display:grid;
@@ -94,15 +45,17 @@
     border-radius:12px;
     box-shadow:0 4px 12px rgba(0,0,0,0.5);
     transition:0.3s;
+    cursor:pointer;
   }
 
   .insta-grid img:hover{
     transform:scale(1.07);
   }
 
+  /* Button */
   .button{
     display:inline-block;
-    margin:30px 0;
+    margin:40px 0;
     padding:15px 35px;
     background:linear-gradient(45deg,#ff0080,#ff5db1);
     color:white;
@@ -111,31 +64,83 @@
     border-radius:40px;
     font-weight:bold;
   }
+
+  /* Zoom Overlay */
+  .zoom-overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.9);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+  }
+
+  .zoom-overlay img{
+    max-width:90%;
+    max-height:80%;
+    border-radius:12px;
+    box-shadow:0 0 30px rgba(255,255,255,0.3);
+  }
+
+  .close-btn{
+    position:absolute;
+    top:20px;
+    right:20px;
+    font-size:30px;
+    color:white;
+    cursor:pointer;
+    background:rgba(0,0,0,0.6);
+    padding:8px 14px;
+    border-radius:50%;
+  }
 </style>
 </head>
 
 <body>
 
-<h1>📸 VHDIX Gallery</h1>
-<p>All Photos in Grid Style</p>
+<div class="container">
+  <h1>🔥 Welcome</h1>
+  <p>You successfully opened the next page</p>
 
-<div class="insta-grid">
-  <img src="img1.jpg">
-  <img src="img2.jpg">
-  <img src="img3.jpg">
-  <img src="img4.jpg">
-  <img src="img5.jpg">
-  <img src="img6.jpg">
-  <img src="img7.jpg">
-  <img src="img8.jpg">
-  <img src="img9.png">
-  <img src="img10.jpg">
+  <h1>📸 VHDIX Gallery</h1>
+  <p>Tap photo to zoom</p>
+
+  <div class="insta-grid">
+    <img src="img1.jpg" onclick="zoomImg(this)">
+    <img src="img2.jpg" onclick="zoomImg(this)">
+    <img src="img3.jpg" onclick="zoomImg(this)">
+    <img src="img4.jpg" onclick="zoomImg(this)">
+    <img src="img5.jpg" onclick="zoomImg(this)">
+    <img src="img6.jpg" onclick="zoomImg(this)">
+    <img src="img7.jpg" onclick="zoomImg(this)">
+    <img src="img8.jpg" onclick="zoomImg(this)">
+    <img src="img9.png" onclick="zoomImg(this)">
+    <img src="img10.jpg" onclick="zoomImg(this)">
+  </div>
+
+  <a href="Linkxyz.html" class="button">🔗 Get Link</a>
 </div>
 
-<a href="Linkxyz.html" class="button">🔗 Get Link</a>
+<!-- Zoom Overlay -->
+<div class="zoom-overlay" id="zoomBox">
+  <span class="close-btn" onclick="closeZoom()">✕</span>
+  <img id="zoomImg">
+</div>
 
-</body>
-</html>
+<script>
+  function zoomImg(img){
+    document.getElementById("zoomImg").src = img.src;
+    document.getElementById("zoomBox").style.display = "flex";
+  }
+
+  function closeZoom(){
+    document.getElementById("zoomBox").style.display = "none";
+  }
+</script>
 
 </body>
 </html>
