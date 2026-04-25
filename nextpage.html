@@ -2,15 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>How Are You</title>
+    <title>Chavvi Survey</title>
     <style>
         body {
             font-family: Arial;
             background: #0f172a;
             color: white;
             text-align: center;
-            padding-top: 100px;
+            padding-top: 80px;
         }
+
+        h1 {
+            font-size: 30px;
+        }
+
         button {
             padding: 12px 25px;
             margin: 10px;
@@ -21,37 +26,36 @@
             background: #22c55e;
             color: white;
         }
-        img {
-            margin-top: 20px;
-            width: 300px;
+
+        #result {
+            font-size: 40px;
+            margin-top: 30px;
             display: none;
-            border-radius: 10px;
+        }
+
+        img {
+            width: 250px;
+            margin-top: 20px;
+            display: none;
         }
     </style>
 </head>
 <body>
 
-    <h1>How are you?</h1>
+    <h1>How are you Chavvi? 💚<br>Tum kaisi ho?</h1>
 
-    <button onclick="showImage('good')">Theek hun 😊</button>
-    <button onclick="showImage('bad')">Theek nahin hun 😔</button>
+    <button onclick="showResult()">Main theek hun 😊</button>
+    <button onclick="showResult()">Main theek nahin hun 😔</button>
 
-    <br>
+    <div id="result">Main kya karun 😅</div>
 
-    <!-- Images -->
-    <img id="goodImg" src="https://i.imgur.com/2DhmtJ4.png">
-    <img id="badImg" src="https://i.imgur.com/Q9qFt3m.png">
+    <!-- Sticker image -->
+    <img id="sticker" src="sticker.png" alt="sticker">
 
     <script>
-        function showImage(type) {
-            document.getElementById("goodImg").style.display = "none";
-            document.getElementById("badImg").style.display = "none";
-
-            if(type === "good") {
-                document.getElementById("goodImg").style.display = "block";
-            } else {
-                document.getElementById("badImg").style.display = "block";
-            }
+        function showResult() {
+            document.getElementById("result").style.display = "block";
+            document.getElementById("sticker").style.display = "block";
         }
     </script>
 
