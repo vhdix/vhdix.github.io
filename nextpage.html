@@ -1,107 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Next Page - VHDIX</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
-  body{
-    margin:0;
-    font-family:Arial, sans-serif;
-    background:linear-gradient(135deg,#141E30,#243B55);
-    color:white;
-    text-align:center;
-  }
-
-  .container{
-    padding:50px 20px;
-  }
-
-  h1{
-    margin-top:30px;
-    font-size:40px;
-  }
-
-  p{
-    font-size:18px;
-    opacity:0.9;
-  }
-
-  .insta-grid{
-    margin:40px auto;
-    display:grid;
-    grid-template-columns:repeat(auto-fill, minmax(120px, 1fr));
-    gap:12px;
-    max-width:1000px;
-    padding:0 15px;
-  }
-
-  .insta-grid img{
-    width:100%;
-    aspect-ratio:1/1;
-    object-fit:cover;
-    border-radius:12px;
-    box-shadow:0 4px 12px rgba(0,0,0,0.5);
-    cursor:pointer;
-    transition:0.3s;
-  }
-
-  .insta-grid img:hover{
-    transform:scale(1.07);
-  }
-
-  .button{
-    display:inline-block;
-    margin:40px 0;
-    padding:15px 35px;
-    background:linear-gradient(45deg,#ff0080,#ff5db1);
-    color:white;
-    text-decoration:none;
-    font-size:18px;
-    border-radius:40px;
-    font-weight:bold;
-  }
-
-  /* Zoom Overlay */
-  .zoom-overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.9);
-    display:none;
-    justify-content:center;
-    align-items:center;
-    z-index:999;
-  }
-
-  .zoom-overlay img{
-    max-width:90%;
-    max-height:80%;
-    border-radius:12px;
-  }
-
-  .close-btn{
-    position:absolute;
-    top:20px;
-    right:20px;
-    font-size:30px;
-    cursor:pointer;
-    background:rgba(0,0,0,0.6);
-    padding:8px 14px;
-    border-radius:50%;
-  }
-</style>
+    <meta charset="UTF-8">
+    <title>My First Website</title>
+    <style>
+        body {
+            background-color: #0f172a;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 100px;
+        }
+        h1 {
+            font-size: 40px;
+        }
+        p {
+            font-size: 20px;
+            color: #94a3b8;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #22c55e;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="container">
-  <h1>🔥 Welcome</h1>
-  <p>You successfully opened the next page</p>
+    <h1>Hello, how are you Chavvi? 😊</h1>
+    <p>This is my first website</p>
 
-  <h1>NEXT PAGE 😛</h1>
-  
-<p>Welcome to our offical webpage</p>
-  
+    <button onclick="showMessage()">Click Me</button>
+
+    <script>
+        function showMessage() {
+            alert("Hope you are doing great, Chavvi! 💚");
+        }
+    </script>
+
 </body>
 </html>
