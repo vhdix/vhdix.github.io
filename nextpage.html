@@ -1,19 +1,15 @@
-ab<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Chavvi Survey</title>
+    <title>Chavvi Page</title>
     <style>
         body {
             font-family: Arial;
             background: #0f172a;
             color: white;
             text-align: center;
-            padding-top: 80px;
-        }
-
-        h1 {
-            font-size: 30px;
+            padding-top: 100px;
         }
 
         button {
@@ -27,35 +23,36 @@ ab<!DOCTYPE html>
             color: white;
         }
 
-        #result {
-            font-size: 40px;
-            margin-top: 30px;
+        /* Overlay style */
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            color: white;
             display: none;
-        }
-
-        img {
-            width: 250px;
-            margin-top: 20px;
-            display: none;
+            justify-content: center;
+            align-items: center;
+            font-size: 60px;
+            z-index: 1000;
         }
     </style>
 </head>
 <body>
 
-    <h1>How are you Chavvi? 💚<br>Tum kaisi ho?</h1>
+    <h1>Hello, how are you Chavvi? 😊</h1>
 
-    <button onclick="showResult()">Main theek hun 😊</button>
-    <button onclick="showResult()">Main theek nahin hun 😔</button>
+    <button onclick="showOverlay()">Main theek hun</button>
+    <button onclick="showOverlay()">Main theek nahin hun</button>
 
-    <div id="result">To bhai Main kya karun 😅</div>
-
-    <!-- Sticker image -->
-    <img id="sticker" src="sticker.png" alt="sticker">
+    <!-- Overlay -->
+    <div id="overlay">Main kya karun 😅</div>
 
     <script>
-        function showResult() {
-            document.getElementById("result").style.display = "block";
-            document.getElementById("sticker").style.display = "block";
+        function showOverlay() {
+            document.getElementById("overlay").style.display = "flex";
         }
     </script>
 
