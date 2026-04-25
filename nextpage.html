@@ -2,42 +2,56 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My First Website</title>
+    <title>How Are You</title>
     <style>
         body {
-            background-color: #0f172a;
+            font-family: Arial;
+            background: #0f172a;
             color: white;
-            font-family: Arial, sans-serif;
             text-align: center;
             padding-top: 100px;
         }
-        h1 {
-            font-size: 40px;
-        }
-        p {
-            font-size: 20px;
-            color: #94a3b8;
-        }
         button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #22c55e;
+            padding: 12px 25px;
+            margin: 10px;
+            font-size: 18px;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
+            background: #22c55e;
+            color: white;
+        }
+        img {
+            margin-top: 20px;
+            width: 300px;
+            display: none;
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
 
-    <h1>Hello, how are you Chavvi? 😊</h1>
-    <p>This is my first website</p>
+    <h1>How are you?</h1>
 
-    <button onclick="showMessage()">Click Me</button>
+    <button onclick="showImage('good')">Theek hun 😊</button>
+    <button onclick="showImage('bad')">Theek nahin hun 😔</button>
+
+    <br>
+
+    <!-- Images -->
+    <img id="goodImg" src="https://i.imgur.com/2DhmtJ4.png">
+    <img id="badImg" src="https://i.imgur.com/Q9qFt3m.png">
 
     <script>
-        function showMessage() {
-            alert("Hope you are doing great, Chavvi! 💚");
+        function showImage(type) {
+            document.getElementById("goodImg").style.display = "none";
+            document.getElementById("badImg").style.display = "none";
+
+            if(type === "good") {
+                document.getElementById("goodImg").style.display = "block";
+            } else {
+                document.getElementById("badImg").style.display = "block";
+            }
         }
     </script>
 
