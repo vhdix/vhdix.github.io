@@ -170,17 +170,10 @@ footer {
 .card:hover{
     transform:translateY(-8px);
 }
-.gallery-page{
-    max-width:1400px;
-    margin:auto;
-    padding:40px 20px;
-    text-align:center;
-}
-
 .gallery{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-    gap:20px;
+    display:flex;
+    flex-direction:column;
+    gap:25px;
     margin-top:30px;
 }
 
@@ -189,11 +182,10 @@ footer {
     height:auto;
     display:block;
     border-radius:15px;
-    transition:.3s;
     box-shadow:0 5px 15px rgba(0,0,0,.4);
+    transition:0.3s;
 }
 
 .gallery img:hover{
     transform:scale(1.02);
 }
-
