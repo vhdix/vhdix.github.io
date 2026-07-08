@@ -171,23 +171,13 @@ footer {
     transform:translateY(-8px);
 }
 .gallery{
-    display:block;
-    background:red;
-
-    
-    .gallery img{
-    width:100%;
-    height:auto;
-    display:block;
-    border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,.4);
-    transition:0.3s;
+    display: block;
 }
 
-.gallery img:hover{
-    transform:scale(1.02);
-}
-.gallery{
-    max-width:1000px;
-    margin:30px auto;
+.gallery img{
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 20px 0;
+    border-radius: 15px;
 }
