@@ -189,3 +189,7 @@ footer {
 .gallery img:hover{
     transform:scale(1.02);
 }
+.gallery{
+    max-width:1000px;
+    margin:30px auto;
+}
