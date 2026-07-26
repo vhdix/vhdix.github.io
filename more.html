@@ -1,38 +1,108 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-    <title> 
-🌸VHDIX Official
-    </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+
+<head>
+    <title>JavaScript Example</title>
     <style>
-        body {
-            background: linear-gradient(135deg, #ea0707, #1d8a2294);
-            color: white;
+        header {
+            background-color: #f2f2f2;
+            padding: 20px;
             text-align: center;
-            font-family: Arial, sans-serif;
         }
-        </style>
-    
-    <div>
-        <header>
-            <logo>
-                <img src="profilevhdix.png" alt="VHDIX Logo" style="width: 100px; height: 100px; border-radius: 50%; border: 4px solid rgb(199, 15, 209); box-shadow: 0 14px 15px rgba(0,0,0,0.5);">
-            </logo>
-            <h1>VHDIX</h1>
-            <a href="index.html">Home</a>
-        </header>
-    </div>
+        body {
+            background: linear-gradient(135deg, #da2546, #a1823e, #e72476 );
+            margin: 0;
+            padding: 0;
+        }
+        table {
+            width: 35%;
+            text-align: center;
+            font-transform: uppercase;
+            margin: 20px auto;
+            border-collapse: collapse;
+            boder: 3px solid;
+            border-color: #000;
+            border-radius: 10px;
+            border-spacing: 0;
+            border: 3px solid #000;
+            background-color: #f3f038;
+            
+        }
+    </style>
+</head>
 
-    </head>
-    <body>
-        
-        <p>Official Website of VHDIX</p>
-
+<body>
+    <header>
         <div>
-            <img
-        </div>
-        
-    </body>
+        <h1>JavaScript Example</h1> </div>
+    </header>
+    <center>
+
+        <div id="error_div" style="color:red;font-weight: bolder;"></div>
+        <div id="Rows_Count"></div>
+
+        <table id="tbl" border="1">
+            <tr>
+                <th>Student Name</th>
+                <th>Age</th>
+            </tr>
+            <tr>
+                <td>John</td>
+                <td>20</td>
+            </tr>
+        </table>
+
+        <br><br>
+        <button id="btnAdd" onclick="add_row()">Add Row</button>
+        <button id="btnDelete" onclick="delete_row()">Delete Row</button>
+
+    </center>
+
+    <script>
+        var tbl = document.getElementById("tbl");
+        var students = ["Keith", "Monika", "Samar", "Pranjal", "Lokesh", "Varuna"];
+        var count = 0;
+
+        function add_row() {
+            if (count > 5) {
+                document.getElementById("error_div").innerHTML =
+                    "All Students are added, No More Left";
+                return;
+            }
+
+            let randomage = Math.floor((Math.random() * 6) + 18);
+            let row = tbl.insertRow();
+
+            row.insertCell(0).innerHTML = students[count];
+            row.insertCell(1).innerHTML = randomage;
+
+            count++;
+
+            document.getElementById("Rows_Count").innerHTML =
+                "Total Rows = " + (tbl.rows.length - 1);
+        }
+
+        /* Deleting Row from Table */
+        function delete_row() {
+
+            if (count == 0) {
+                document.getElementById("error_div").innerHTML =
+                    "All Dynamic Values are deleted now, no More left";
+                return;
+            }
+
+            tbl.deleteRow(tbl.rows.length - 1);
+            count--;
+
+            document.getElementById("Rows_Count").innerHTML =
+                "Total Rows = " + (tbl.rows.length - 1);
+        }
+    </script>
+    <p>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+    </p>
+
+</body>
+
 </html>
