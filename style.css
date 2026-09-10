@@ -67,3 +67,55 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:24px
 @keyframes flash{0%{opacity:0}18%{opacity:.13}35%{opacity:0}60%{opacity:.05}100%{opacity:0}}
 @keyframes writeGlow{0%{filter:blur(5px);opacity:.1}35%{filter:blur(1px);opacity:.55}100%{filter:none;opacity:1}}
 @media(max-width:700px){.topbar{height:62px}.status{display:none}.hero{padding-top:60px}.ritual-card{padding:12px}.book-stage{height:350px}.book{width:300px;height:220px}.cover-title{font-size:23px}.cover-title strong{font-size:29px}.features{grid-template-columns:1fr}.features article{min-height:auto}.input-wrap{flex-direction:column}button{height:50px}.input-zone{padding-top:20px}footer{gap:15px;flex-direction:column}}
+
+
+/* ============================================================
+   DEATH NOTE COVER — FAN-MADE CSS RECREATION
+   ============================================================ */
+.cover {
+  background:
+    radial-gradient(circle at 25% 18%, rgba(255,255,255,.07), transparent 22%),
+    radial-gradient(circle at 75% 80%, rgba(255,255,255,.035), transparent 28%),
+    repeating-linear-gradient(100deg, rgba(255,255,255,.018) 0 2px, transparent 2px 7px),
+    linear-gradient(145deg, #151515, #050505 48%, #111 100%);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06), inset 0 0 35px rgba(0,0,0,.9);
+}
+.cover-border {
+  border: 1px solid rgba(255,255,255,.16);
+  inset: 16px;
+  position: absolute;
+}
+.cover-title {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 700;
+  letter-spacing: .08em;
+  line-height: .9;
+  color: #e7e7e7;
+  text-shadow: 2px 2px 0 #000, 0 0 10px rgba(255,255,255,.06);
+  transform: scaleX(.9);
+}
+.cover-title strong { font-weight: 800; }
+.cover-symbol {
+  color: #aaa;
+  text-shadow: 0 0 10px rgba(255,255,255,.18);
+}
+.cover-sub {
+  color: #777;
+  letter-spacing: .18em;
+  font-size: .55rem;
+}
+.page {
+  background:
+    radial-gradient(circle at 50% 20%, rgba(255,255,255,.45), transparent 35%),
+    repeating-linear-gradient(0deg, rgba(50,35,20,.035) 0 1px, transparent 1px 4px),
+    #d8d0bd;
+}
+.page-heading {
+  font-family: Georgia, 'Times New Roman', serif;
+  letter-spacing: .16em;
+}
+.written-name {
+  font-family: 'Special Elite', Georgia, serif;
+  color: #681010;
+  text-shadow: 1px 1px 0 rgba(35,0,0,.28), 0 0 8px rgba(110,0,0,.16);
+}
