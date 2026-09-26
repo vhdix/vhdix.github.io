@@ -1,171 +1,1110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VHDIX | Official 3D Gaming Hub</title>
 
-    <title>VHDIX — Under Construction</title>
+  <!-- Google Fonts: Orbitron & Rajdhani for Cyber/Gaming Feel -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-        body {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+  <!-- Vanilla Tilt (For 3D Hover Tilt) & Three.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
 
-            font-family: Arial, Helvetica, sans-serif;
-            background:
-                radial-gradient(circle at top, #1d2638 0%, #0b0f17 45%, #05070b 100%);
-            color: #ffffff;
-            overflow: hidden;
-        }
+  <style>
+    /* ==========================================================
+       CSS VARIABLES & RESET
+       ========================================================== */
+    :root {
+      --bg-dark: #070913;
+      --card-bg: rgba(16, 20, 36, 0.7);
+      --card-border: rgba(0, 242, 254, 0.25);
+      --neon-cyan: #00f2fe;
+      --neon-purple: #9d4edd;
+      --neon-red: #ff0055;
+      --text-main: #f0f3ff;
+      --text-dim: #94a3b8;
+      --font-cyber: 'Orbitron', sans-serif;
+      --font-body: 'Rajdhani', sans-serif;
+    }
 
-        .container {
-            width: 100%;
-            max-width: 650px;
-            text-align: center;
-            padding: 55px 35px;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
 
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 24px;
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-size: 1.15rem;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
 
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #06070c;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(var(--neon-purple), var(--neon-cyan));
+      border-radius: 4px;
+    }
 
-            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
-        }
+    /* Three.js 3D Background Canvas */
+    #webgl-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      pointer-events: none;
+    }
 
-        .logo {
-            font-size: clamp(3rem, 12vw, 6rem);
-            font-weight: 900;
-            letter-spacing: 8px;
-            margin-bottom: 20px;
+    /* ==========================================================
+       HEADER & NAVIGATION
+       ========================================================== */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      backdrop-filter: blur(15px);
+      background: rgba(7, 9, 19, 0.75);
+      border-bottom: 1px solid rgba(0, 242, 254, 0.15);
+      transition: all 0.3s ease;
+    }
 
-            background: linear-gradient(90deg, #ffffff, #8c9eff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+    .nav-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 1.1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-        .construction {
-            display: inline-block;
-            padding: 8px 16px;
-            margin-bottom: 25px;
+    .brand-logo {
+      font-family: var(--font-cyber);
+      font-size: 1.8rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-decoration: none;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-shadow: 0 0 12px var(--neon-cyan);
+    }
 
-            border: 1px solid rgba(255, 193, 7, 0.4);
-            border-radius: 50px;
+    .brand-logo span {
+      color: var(--neon-cyan);
+    }
 
-            background: rgba(255, 193, 7, 0.08);
-            color: #ffd54a;
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2.2rem;
+    }
 
-            font-size: 14px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
+    .nav-link {
+      font-family: var(--font-cyber);
+      text-decoration: none;
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      position: relative;
+      transition: color 0.3s;
+    }
 
-        h1 {
-            font-size: clamp(1.8rem, 5vw, 2.7rem);
-            margin-bottom: 18px;
-        }
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--neon-cyan);
+      text-shadow: 0 0 8px var(--neon-cyan);
+    }
 
-        .message {
-            color: #b8c0d0;
-            font-size: 1.05rem;
-            line-height: 1.7;
-            max-width: 520px;
-            margin: auto;
-        }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
+      transition: width 0.3s ease;
+    }
 
-        .notice {
-            margin-top: 30px;
-            padding: 18px;
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
 
-            background: rgba(255, 255, 255, 0.04);
-            border-radius: 14px;
+    .menu-toggle {
+      display: none;
+      font-size: 1.6rem;
+      color: var(--neon-cyan);
+      cursor: pointer;
+    }
 
-            color: #d9deea;
-            font-size: 14px;
-            line-height: 1.6;
-        }
+    /* ==========================================================
+       GLOBAL SECTION STYLING
+       ========================================================== */
+    section {
+      padding: 110px 2rem 70px;
+      max-width: 1300px;
+      margin: 0 auto;
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
 
-        .loader {
-            width: 55px;
-            height: 55px;
-            margin: 35px auto 0;
+    .section-title {
+      font-family: var(--font-cyber);
+      font-size: 2.6rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 0.5rem;
+      position: relative;
+      display: inline-block;
+    }
 
-            border: 4px solid rgba(255, 255, 255, 0.1);
-            border-top-color: #8c9eff;
-            border-radius: 50%;
+    .section-title span {
+      background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-            animation: spin 1s linear infinite;
-        }
+    .section-subtitle {
+      color: var(--text-dim);
+      margin-bottom: 3rem;
+      font-size: 1.15rem;
+      max-width: 650px;
+    }
 
-        footer {
-            margin-top: 35px;
-            color: #687084;
-            font-size: 13px;
-        }
+    /* 3D Glass Card Container */
+    .glass-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      transform-style: preserve-3d;
+      transition: border 0.3s ease, box-shadow 0.3s ease;
+    }
 
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
+    .glass-card:hover {
+      border-color: var(--neon-cyan);
+      box-shadow: 0 15px 35px rgba(0, 242, 254, 0.2);
+    }
 
-        @media (max-width: 480px) {
-            .container {
-                padding: 45px 22px;
-                border-radius: 20px;
-            }
+    /* Primary Gaming Button */
+    .btn {
+      font-family: var(--font-cyber);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0.85rem 1.8rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #fff;
+      text-decoration: none;
+      background: linear-gradient(135deg, var(--neon-purple), #3f1188);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(157, 78, 221, 0.4);
+    }
 
-            .logo {
-                letter-spacing: 5px;
-            }
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 25px rgba(0, 242, 254, 0.6);
+      border-color: var(--neon-cyan);
+    }
 
-            .message {
-                font-size: 0.95rem;
-            }
-        }
-    </style>
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--neon-cyan);
+      color: var(--neon-cyan);
+      box-shadow: 0 4px 15px rgba(0, 242, 254, 0.15);
+    }
+
+    .btn-outline:hover {
+      background: var(--neon-cyan);
+      color: #070913;
+    }
+
+    /* ==========================================================
+       SECTION 1: HOME (HERO)
+       ========================================================== */
+    .hero-container {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      align-items: center;
+      gap: 3rem;
+      min-height: 80vh;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-family: var(--font-cyber);
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      padding: 6px 14px;
+      background: rgba(0, 242, 254, 0.12);
+      border: 1px solid var(--neon-cyan);
+      color: var(--neon-cyan);
+      border-radius: 50px;
+      margin-bottom: 1.2rem;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      font-family: var(--font-cyber);
+      font-size: 4rem;
+      line-height: 1.1;
+      font-weight: 900;
+      margin-bottom: 1.2rem;
+      letter-spacing: 2px;
+    }
+
+    .hero-title .glow-name {
+      background: linear-gradient(135deg, #fff 0%, var(--neon-cyan) 60%, var(--neon-purple) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 25px rgba(0, 242, 254, 0.4));
+    }
+
+    .hero-desc {
+      font-size: 1.25rem;
+      color: var(--text-dim);
+      margin-bottom: 2rem;
+      max-width: 520px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    /* 3D Floating Hologram Card in Hero */
+    .hero-badge-card {
+      padding: 2.5rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .badge-icon {
+      font-size: 4.5rem;
+      color: var(--neon-cyan);
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 0 20px var(--neon-cyan));
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-12px) rotate(3deg); }
+    }
+
+    .badge-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 1.5rem;
+    }
+
+    .stat-box h4 {
+      font-family: var(--font-cyber);
+      font-size: 1.8rem;
+      color: var(--neon-cyan);
+    }
+
+    .stat-box p {
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
+
+    /* ==========================================================
+       SECTION 2: GALLERY
+       ========================================================== */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .gallery-card {
+      overflow: hidden;
+      border-radius: 16px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .gallery-img-box {
+      width: 100%;
+      height: 230px;
+      position: relative;
+      overflow: hidden;
+      background: #111425;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gallery-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .gallery-card:hover .gallery-img-box img {
+      transform: scale(1.1);
+    }
+
+    .gallery-info {
+      padding: 1.5rem;
+      background: var(--card-bg);
+      transform: translateZ(30px);
+    }
+
+    .gallery-tag {
+      font-size: 0.8rem;
+      font-family: var(--font-cyber);
+      color: var(--neon-cyan);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .gallery-info h3 {
+      font-family: var(--font-cyber);
+      font-size: 1.3rem;
+      margin: 0.4rem 0;
+    }
+
+    .gallery-info p {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+    }
+
+    /* ==========================================================
+       SECTION 3: DOWNLOAD
+       ========================================================== */
+    .download-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2rem;
+    }
+
+    .download-card {
+      padding: 2.2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .download-header {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .download-icon {
+      font-size: 2.2rem;
+      color: var(--neon-cyan);
+      background: rgba(0, 242, 254, 0.1);
+      padding: 1rem;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 242, 254, 0.2);
+    }
+
+    .download-card h3 {
+      font-family: var(--font-cyber);
+      font-size: 1.35rem;
+    }
+
+    .download-meta {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      margin: 1rem 0 1.5rem;
+      line-height: 1.6;
+    }
+
+    .meta-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.4rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    /* ==========================================================
+       SECTION 4: ABOUT
+       ========================================================== */
+    .about-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .about-text p {
+      margin-bottom: 1.4rem;
+      font-size: 1.15rem;
+      color: #cbd5e1;
+    }
+
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+      margin-top: 1.5rem;
+    }
+
+    .spec-item {
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+      border-left: 3px solid var(--neon-purple);
+    }
+
+    .spec-item strong {
+      display: block;
+      font-family: var(--font-cyber);
+      color: #fff;
+      font-size: 0.95rem;
+    }
+
+    .spec-item span {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+    }
+
+    /* ==========================================================
+       SECTION 5: CONTACT
+       ========================================================== */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .contact-form {
+      padding: 2.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-family: var(--font-cyber);
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      margin-bottom: 0.4rem;
+      color: var(--neon-cyan);
+    }
+
+    .form-control {
+      width: 100%;
+      background: rgba(7, 9, 19, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      padding: 0.9rem 1.2rem;
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      outline: none;
+      transition: all 0.3s;
+    }
+
+    .form-control:focus {
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 12px rgba(0, 242, 254, 0.3);
+    }
+
+    .contact-socials {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .social-link-card {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      padding: 1.2rem 1.5rem;
+      text-decoration: none;
+      color: #fff;
+      transition: all 0.3s ease;
+    }
+
+    .social-link-card i {
+      font-size: 1.8rem;
+      color: var(--neon-cyan);
+    }
+
+    .social-link-card:hover {
+      transform: translateX(10px);
+      border-color: var(--neon-cyan);
+    }
+
+    /* ==========================================================
+       FOOTER
+       ========================================================== */
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(5, 7, 14, 0.95);
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-content p {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+    }
+
+    /* ==========================================================
+       RESPONSIVE DESIGN (MEDIA QUERIES)
+       ========================================================== */
+    @media (max-width: 992px) {
+      .hero-container,
+      .about-layout,
+      .contact-layout {
+        grid-template-columns: 1fr;
+      }
+      .hero-title {
+        font-size: 3.2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(7, 9, 19, 0.96);
+        border-bottom: 1px solid var(--neon-cyan);
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem 0;
+        gap: 1.6rem;
+        display: none;
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .hero-title {
+        font-size: 2.6rem;
+      }
+      .section-title {
+        font-size: 2.1rem;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-    <main class="container">
+  <!-- Three.js Background Canvas -->
+  <canvas id="webgl-bg"></canvas>
 
-        <div class="logo">VHDIX</div>
+  <!-- ==========================================================
+       HEADER / NAVBAR
+       ========================================================== -->
+  <header>
+    <div class="nav-container">
+      <a href="#home" class="brand-logo">
+        <i class="fa-solid fa-gamepad"></i> VHDIX<span>.</span>
+      </a>
 
-        <div class="construction">
-            🚧 WEBSITE UNDER CONSTRUCTION
-        </div>
+      <!-- 5 Header Nav Links -->
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#gallery" class="nav-link">Gallery</a></li>
+        <li><a href="#download" class="nav-link">Download</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
 
-        <h1>We're Building Something Awesome.</h1>
+      <div class="menu-toggle" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+    </div>
+  </header>
 
-        <p class="message">
-            The VHDIX website is currently under construction.
-            We're working behind the scenes to bring you a better
-            and more exciting experience.
+  <!-- ==========================================================
+       1. HOME (HERO)
+       ========================================================== -->
+  <section id="home">
+    <div class="hero-container">
+      <div class="hero-content">
+        <span class="hero-tag"><i class="fa-solid fa-bolt"></i> Cyber Gaming Hub</span>
+        <h1 class="hero-title">WELCOME TO <br><span class="glow-name">VHDIX</span></h1>
+        <p class="hero-desc">
+          High-performance gaming setups, competitive highlights, bespoke custom content, and esports utilities designed for the next generation of gamers.
         </p>
-
-        <div class="notice">
-            🔧 Please check back soon.<br>
-            The website will be available once development is complete.
+        <div class="hero-actions">
+          <a href="#gallery" class="btn"><i class="fa-solid fa-fire"></i> Explore Gallery</a>
+          <a href="#download" class="btn btn-outline"><i class="fa-solid fa-download"></i> Downloads</a>
         </div>
+      </div>
 
-        <div class="loader"></div>
+      <!-- 3D Tilt Badge Hologram -->
+      <div class="glass-card hero-badge-card tilt-card" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.25">
+        <div class="badge-icon">
+          <i class="fa-solid fa-vr-cardboard"></i>
+        </div>
+        <h2 style="font-family: var(--font-cyber); font-size: 1.8rem;">VHDIX ARENA</h2>
+        <p style="color: var(--neon-cyan); letter-spacing: 1px;">ULTRA GRAPHICS • 144 FPS</p>
 
-        <footer>
-            © 2026 VHDIX. All rights reserved.
-        </footer>
+        <div class="badge-stats">
+          <div class="stat-box">
+            <h4>4K</h4>
+            <p>Renders</p>
+          </div>
+          <div class="stat-box">
+            <h4>100%</h4>
+            <p>Optimized</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    </main>
+  <!-- ==========================================================
+       2. GALLERY
+       ========================================================== -->
+  <section id="gallery">
+    <h2 class="section-title">GAMING <span>GALLERY</span></h2>
+    <p class="section-subtitle">Showcase of 4K game captures, custom thumbnails, and competitive highlights.</p>
 
+    <div class="gallery-grid">
+      <!-- Item 1 -->
+      <div class="glass-card gallery-card tilt-card" data-tilt data-tilt-max="12">
+        <div class="gallery-img-box">
+          <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80" alt="Esports Arena">
+        </div>
+        <div class="gallery-info">
+          <span class="gallery-tag">Battle Royale</span>
+          <h3>Clutch Highlights</h3>
+          <p>Tactical solo vs squad final circle moments captured in vivid 4K 60FPS.</p>
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="glass-card gallery-card tilt-card" data-tilt data-tilt-max="12">
+        <div class="gallery-img-box">
+          <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80" alt="Cyberpunk Setup">
+        </div>
+        <div class="gallery-info">
+          <span class="gallery-tag">Cyber World</span>
+          <h3>Night City Protocol</h3>
+          <p>Ray-traced open-world aesthetics running on high-performance RTX rigs.</p>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="glass-card gallery-card tilt-card" data-tilt data-tilt-max="12">
+        <div class="gallery-img-box">
+          <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=800&q=80" alt="Arcade & Battle">
+        </div>
+        <div class="gallery-info">
+          <span class="gallery-tag">Action & Speed</span>
+          <h3>Fast Reflex Scrims</h3>
+          <p>Sniper trickshots and quick-scope reaction clips in intense custom lobbies.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================
+       3. DOWNLOAD
+       ========================================================== -->
+  <section id="download">
+    <h2 class="section-title">DOWNLOAD <span>CENTER</span></h2>
+    <p class="section-subtitle">Grab the latest gaming presets, custom configs, and ultra-high-res 4K wallpapers.</p>
+
+    <div class="download-grid">
+      <!-- Download 1 -->
+      <div class="glass-card download-card tilt-card" data-tilt data-tilt-max="10">
+        <div>
+          <div class="download-header">
+            <div class="download-icon"><i class="fa-solid fa-sliders"></i></div>
+            <div>
+              <h3>VHDIX FPS Booster</h3>
+              <span style="color: var(--neon-cyan); font-size: 0.85rem;">Config Pack v2.4</span>
+            </div>
+          </div>
+          <p style="color: var(--text-dim); font-size: 0.95rem;">
+            Custom system registry tweaks & low-latency configuration profile for max FPS in PC titles.
+          </p>
+          <div class="download-meta">
+            <div class="meta-item"><span>Compatibility</span><span>Windows 10/11</span></div>
+            <div class="meta-item"><span>File Size</span><span>12.4 MB</span></div>
+            <div class="meta-item"><span>Version</span><span>Latest Stable</span></div>
+          </div>
+        </div>
+        <a href="#download" class="btn"><i class="fa-solid fa-download"></i> Get Config</a>
+      </div>
+
+      <!-- Download 2 -->
+      <div class="glass-card download-card tilt-card" data-tilt data-tilt-max="10">
+        <div>
+          <div class="download-header">
+            <div class="download-icon"><i class="fa-solid fa-image"></i></div>
+            <div>
+              <h3>4K Wallpaper Pack</h3>
+              <span style="color: var(--neon-cyan); font-size: 0.85rem;">Vol. 3 Ultra HD</span>
+            </div>
+          </div>
+          <p style="color: var(--text-dim); font-size: 0.95rem;">
+            Curated high-resolution gaming & anime dark-mode wallpapers designed for 1080p and 1440p monitors.
+          </p>
+          <div class="download-meta">
+            <div class="meta-item"><span>Resolution</span><span>3840 x 2160</span></div>
+            <div class="meta-item"><span>Images</span><span>25 Renders</span></div>
+            <div class="meta-item"><span>File Size</span><span>185 MB</span></div>
+          </div>
+        </div>
+        <a href="#download" class="btn"><i class="fa-solid fa-download"></i> Download Pack</a>
+      </div>
+
+      <!-- Download 3 -->
+      <div class="glass-card download-card tilt-card" data-tilt data-tilt-max="10">
+        <div>
+          <div class="download-header">
+            <div class="download-icon"><i class="fa-solid fa-crosshairs"></i></div>
+            <div>
+              <h3>Sens & Crosshair Pack</h3>
+              <span style="color: var(--neon-cyan); font-size: 0.85rem;">Competitive Profile</span>
+            </div>
+          </div>
+          <p style="color: var(--text-dim); font-size: 0.95rem;">
+            Precision sensitivity calculator and static custom crosshair overlay presets for fast flicking.
+          </p>
+          <div class="download-meta">
+            <div class="meta-item"><span>DPI Base</span><span>800 / 1200 DPI</span></div>
+            <div class="meta-item"><span>Supported</span><span>All Shooters</span></div>
+            <div class="meta-item"><span>File Size</span><span>5.2 MB</span></div>
+          </div>
+        </div>
+        <a href="#download" class="btn"><i class="fa-solid fa-download"></i> Get Preset</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================
+       4. ABOUT
+       ========================================================== -->
+  <section id="about">
+    <h2 class="section-title">ABOUT <span>VHDIX</span></h2>
+    <p class="section-subtitle">Creator, tech enthusiast, and competitive gamer pushing the limits of play and design.</p>
+
+    <div class="about-layout">
+      <div class="about-text">
+        <p>
+          <strong>VHDIX</strong> is a personal gaming and digital media brand focused on competitive action gaming, esports content creation, and software optimization.
+        </p>
+        <p>
+          From mastering high-pace battle royales to tuning high-refresh-rate gaming setups and rendering custom motion content, VHDIX aims to deliver top-tier gameplay with clean futuristic design.
+        </p>
+        <div class="specs-grid">
+          <div class="spec-item">
+            <strong>CPU / GPU</strong>
+            <span>High-End AMD & NVIDIA RTX</span>
+          </div>
+          <div class="spec-item">
+            <strong>Display</strong>
+            <span>144Hz High-Refresh IPS</span>
+          </div>
+          <div class="spec-item">
+            <strong>Key Titles</strong>
+            <span>Shooters, Open World, Simulators</span>
+          </div>
+          <div class="spec-item">
+            <strong>Mission</strong>
+            <span>Pure Performance & Creative Edge</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card tilt-card" data-tilt data-tilt-max="10" style="padding: 2rem;">
+        <h3 style="font-family: var(--font-cyber); margin-bottom: 1.5rem; color: var(--neon-cyan);">
+          <i class="fa-solid fa-shield-halved"></i> PERFORMANCE STATS
+        </h3>
+        <div style="display: flex; flex-direction: column; gap: 1.2rem;">
+          <div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.3rem;">
+              <span>Aim & Reaction Speed</span>
+              <span style="color: var(--neon-cyan);">95%</span>
+            </div>
+            <div style="background: rgba(255,255,255,0.1); border-radius: 4px; height: 6px; overflow: hidden;">
+              <div style="background: var(--neon-cyan); width: 95%; height: 100%;"></div>
+            </div>
+          </div>
+          <div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.3rem;">
+              <span>System Optimization</span>
+              <span style="color: var(--neon-purple);">98%</span>
+            </div>
+            <div style="background: rgba(255,255,255,0.1); border-radius: 4px; height: 6px; overflow: hidden;">
+              <div style="background: var(--neon-purple); width: 98%; height: 100%;"></div>
+            </div>
+          </div>
+          <div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.3rem;">
+              <span>Content Creation</span>
+              <span style="color: var(--neon-red);">90%</span>
+            </div>
+            <div style="background: rgba(255,255,255,0.1); border-radius: 4px; height: 6px; overflow: hidden;">
+              <div style="background: var(--neon-red); width: 90%; height: 100%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================
+       5. CONTACT
+       ========================================================== -->
+  <section id="contact">
+    <h2 class="section-title">CONNECT <span>WITH ME</span></h2>
+    <p class="section-subtitle">Have inquiries, custom collaboration ideas, or want to queue up for a match?</p>
+
+    <div class="contact-layout">
+      <!-- Contact Form -->
+      <form class="glass-card contact-form" onsubmit="event.preventDefault(); alert('Message transmission simulated! Thanks for reaching out.');">
+        <div class="form-group">
+          <label><i class="fa-solid fa-user"></i> Gamer Tag / Name</label>
+          <input type="text" class="form-control" placeholder="Enter your handle..." required>
+        </div>
+        <div class="form-group">
+          <label><i class="fa-solid fa-envelope"></i> Email Address</label>
+          <input type="email" class="form-control" placeholder="name@domain.com" required>
+        </div>
+        <div class="form-group">
+          <label><i class="fa-solid fa-comment-dots"></i> Transmission</label>
+          <textarea class="form-control" rows="4" placeholder="Your message or collaboration idea..." required></textarea>
+        </div>
+        <button type="submit" class="btn" style="margin-top: 0.5rem;">
+          <i class="fa-solid fa-paper-plane"></i> Send Message
+        </button>
+      </form>
+
+      <!-- Social Hub -->
+      <div class="contact-socials">
+        <a href="https://youtube.com" target="_blank" class="glass-card social-link-card">
+          <i class="fa-brands fa-youtube" style="color: #ff0033;"></i>
+          <div>
+            <h4 style="font-family: var(--font-cyber);">YouTube Hub</h4>
+            <p style="color: var(--text-dim); font-size: 0.9rem;">Watch gameplay highlights & edits</p>
+          </div>
+        </a>
+
+        <a href="https://instagram.com" target="_blank" class="glass-card social-link-card">
+          <i class="fa-brands fa-instagram" style="color: #e1306c;"></i>
+          <div>
+            <h4 style="font-family: var(--font-cyber);">Instagram</h4>
+            <p style="color: var(--text-dim); font-size: 0.9rem;">Daily updates, stories & setups</p>
+          </div>
+        </a>
+
+        <a href="https://discord.com" target="_blank" class="glass-card social-link-card">
+          <i class="fa-brands fa-discord" style="color: #5865F2;"></i>
+          <div>
+            <h4 style="font-family: var(--font-cyber);">Discord Squad</h4>
+            <p style="color: var(--text-dim); font-size: 0.9rem;">Join custom scrims & discussions</p>
+          </div>
+        </a>
+
+        <a href="https://github.com" target="_blank" class="glass-card social-link-card">
+          <i class="fa-brands fa-github" style="color: #fff;"></i>
+          <div>
+            <h4 style="font-family: var(--font-cyber);">GitHub Space</h4>
+            <p style="color: var(--text-dim); font-size: 0.9rem;">Open source tools and config repos</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================
+       FOOTER
+       ========================================================== -->
+  <footer>
+    <div class="footer-content">
+      <div style="font-family: var(--font-cyber); font-weight: 700; color: #fff;">
+        VHDIX <span style="color: var(--neon-cyan);">GAMING</span>
+      </div>
+      <p>&copy; 2026 VHDIX. All Rights Reserved. Built with Three.js & Cyberpunk Aesthetics.</p>
+    </div>
+  </footer>
+
+  <!-- ==========================================================
+       THREE.JS 3D INTERACTIVE BACKGROUND SCRIPT
+       ========================================================== -->
+  <script>
+    // 1. Initialize Three.js Scene, Camera, and Renderer
+    const canvas = document.querySelector('#webgl-bg');
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    // 2. Create Floating 3D Geometric Wireframe Object (Icosahedron)
+    const geometry = new THREE.IcosahedronGeometry(7, 2);
+    const material = new THREE.MeshBasicMaterial({
+      color: 0x00f2fe,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.15
+    });
+    const icosahedron = new THREE.Mesh(geometry, material);
+    scene.add(icosahedron);
+
+    // 3. Create 3D Particle Cloud Matrix
+    const particlesCount = 750;
+    const posArray = new Float32Array(particlesCount * 3);
+
+    for (let i = 0; i < particlesCount * 3; i++) {
+      posArray[i] = (Math.random() - 0.5) * 50;
+    }
+
+    const particlesGeometry = new THREE.BufferGeometry();
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+    const particlesMaterial = new THREE.PointsMaterial({
+      size: 0.08,
+      color: 0x9d4edd,
+      transparent: true,
+      opacity: 0.8
+    });
+
+    const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+    scene.add(particlesMesh);
+
+    camera.position.z = 15;
+
+    // 4. Mouse Interactive Parallax
+    let mouseX = 0;
+    let mouseY = 0;
+
+    window.addEventListener('mousemove', (event) => {
+      mouseX = (event.clientX / window.innerWidth - 0.5) * 2;
+      mouseY = -(event.clientY / window.innerHeight - 0.5) * 2;
+    });
+
+    // 5. Animation Loop
+    const clock = new THREE.Clock();
+
+    function animate() {
+      requestAnimationFrame(animate);
+      const elapsedTime = clock.getElapsedTime();
+
+      // Rotate 3D Geometry
+      icosahedron.rotation.x = elapsedTime * 0.1;
+      icosahedron.rotation.y = elapsedTime * 0.15;
+
+      // Rotate Particle Matrix
+      particlesMesh.rotation.y = -elapsedTime * 0.03;
+
+      // Gentle Mouse Tracking
+      camera.position.x += (mouseX * 2 - camera.position.x) * 0.05;
+      camera.position.y += (mouseY * 2 - camera.position.y) * 0.05;
+      camera.lookAt(scene.position);
+
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    // 6. Handle Window Resize
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    });
+
+    // ==========================================================
+    // MOBILE NAV & ACTIVE SECTION HIGHLIGHT
+    // ==========================================================
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    const links = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('section');
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    // Close menu when a link is clicked
+    links.forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
+    });
+
+    // Highlight active link on scroll
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 140;
+        if (pageYOffset >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      links.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
 </body>
 </html>
